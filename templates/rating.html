@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Никнейм</th>
+      <th scope="col">Рейтинг</th>
+    </tr>
+  </thead>
+  <tbody>
+            {% for el in rating %}
+                <tr>
+                      <th scope="row">{{ el['number_place'] }}</th>
+                      <td><a href="/{{ el['handle'] }}">{{ el['handle'] }}</a></td>
+                      <td>{{ el['rating'] }}</td>
+                </tr>
+            {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

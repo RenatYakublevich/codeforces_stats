@@ -1,13 +1,11 @@
 from datetime import datetime
-from flask import Flask, render_template
-from parse import _showInfoUser, _showRatingUser
-from charts import route_charts, create_bar_chart
-from bokeh.embed import components
-from bokeh.plotting import figure
-from bokeh.resources import INLINE
+from flask import Flask, render_template, url_for
+from parse import _showInfoUser, _showRatingUser, _showRatingList
+from charts import route_charts
 
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -41,6 +39,10 @@ def showInfoUser(name):
                                             js_resources=js_resources,
                                             css_resources=css_resources,
                            )
+
+@app.route('/rating')
+def rating():
+    return render_template('rating.html',rating=_showRatingList(0,20))
 
 if __name__ == '__main__':
     app.run(debug=True)
