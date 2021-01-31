@@ -1,6 +1,6 @@
 from datetime import datetime
-from flask import Flask, render_template, url_for
-from parse import _showInfoUser, _showRatingUser, _showRatingList
+from flask import Flask, render_template
+from parse import _show_info_user, _show_rating_user, _show_rating_list
 from charts import _route_charts
 
 
@@ -14,11 +14,11 @@ def index():
 @app.route('/<path:name>')
 def showInfoUser(name):
     try:
-        stats = _showInfoUser(name)
+        stats = _show_info_user(name)
     except KeyError:
         return render_template('info_user.html',stats=['Такого пользователя нет!'])
 
-    script,div,js_resources,css_resources = _route_charts(_showRatingUser(name))
+    script,div,js_resources,css_resources = _route_charts(_show_rating_user(name))
 
     return render_template('info_user.html',stats=[f'Никнейм - {stats["handle"]}',
                                                    f'Имя - {stats["firstName"]}',
@@ -42,7 +42,7 @@ def showInfoUser(name):
 
 @app.route('/rating')
 def rating():
-    return render_template('rating.html',rating=_showRatingList(0,20))
+    return render_template('rating.html',rating=_show_rating_list(0,20))
 
 if __name__ == '__main__':
     app.run(debug=True)

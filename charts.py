@@ -1,16 +1,17 @@
+''' Работа с графиками '''
 from datetime import datetime
 from bokeh.plotting import figure
 from bokeh.embed import components
 from bokeh.resources import INLINE
 
 
-def _create_bar_chart(x,top):
+def _create_bar_chart(x_vertical,top):
     """
     Создаёт столбчатую диаграмму
     """
     fig = figure(plot_width=1100, plot_height=600)
     fig.vbar(
-        x=x,
+        x=x_vertical,
         width=0.5,
         bottom=0,
         top=top,
@@ -40,5 +41,3 @@ def _route_charts(rating_data):
     plot = _create_bar_chart(data_charts['ratingUpdateTimeSeconds'],data_charts['newRating'])
 
     return plot
-
-
