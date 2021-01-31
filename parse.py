@@ -2,10 +2,10 @@ from typing import Dict, List
 import requests
 
 
-def _showInfoUser(name_user) -> Dict:
+def _showInfoUser(name_user: str) -> Dict:
     return requests.get(f'https://codeforces.com/api/user.info?handles={name_user}').json()['result'][0]
 
-def _showRatingUser(name_user):
+def _showRatingUser(name_user: str) -> Dict:
     return requests.get(f'https://codeforces.com/api/user.rating?handle={name_user}').json()['result']
 
 def _showRatingList(start_pos: int,end_pos: int) -> List:
@@ -13,3 +13,4 @@ def _showRatingList(start_pos: int,end_pos: int) -> List:
     for el in range(0,len(rating)):
         rating[el]['number_place'] = el + 1
     return rating
+  
