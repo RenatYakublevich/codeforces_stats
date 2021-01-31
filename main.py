@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Flask, render_template
-from parse import _show_info_user, _show_rating_user, _show_rating_list
+from parse import _show_info_user, _show_rating_user, _show_rating_list, _show_problem_list, _show_tournament_list
 from charts import _route_charts
 
 
@@ -38,11 +38,20 @@ def showInfoUser(name):
                                             plot_div=div,
                                             js_resources=js_resources,
                                             css_resources=css_resources,
+                                            title=stats['handle']
                            )
 
 @app.route('/rating')
 def rating():
-    return render_template('rating.html',rating=_show_rating_list(0,20))
+    return render_template('rating.html',rating=_show_rating_list(0,20),title='Рейтинг')
+
+@app.route('/problems')
+def problems():
+    return render_template('problems.html',problems=_show_problem_list(0,20),title='Задачи')
+
+@app.route('/tournaments')
+def tournaments():
+  return render_template('tournaments.html', tournaments=_show_tournament_list())
 
 if __name__ == '__main__':
     app.run(debug=True)

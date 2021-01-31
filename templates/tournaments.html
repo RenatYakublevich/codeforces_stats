@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Названия</th>
+      <th scope="col">Начало</th>
+      <th scope="col">Длительность</th>
+    </tr>
+  </thead>
+  <tbody>
+            {% for tournament in tournaments %}
+                <tr>
+                      <th scope="row">{{ tournament['name'] }}</th>
+                      <td>{{ tournament['startTimeSeconds'] }}</td>
+                      <td>{{ tournament['durationSeconds'] }}</td>
+                </tr>
+            {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
