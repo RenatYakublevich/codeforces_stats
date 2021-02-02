@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+{% for el in blog %}
+  <div class = "container mt-5">
+    <h1><a href="https://codeforces.com/blog/entry/{{ el['id'] }}">{{ el['title'][3:-4] }}</a></h1>
+  </div>
+{% endfor %}
+{% endblock %}

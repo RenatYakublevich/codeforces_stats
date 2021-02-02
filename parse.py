@@ -30,3 +30,33 @@ def _show_tournament_list() -> List:
 		tournaments[tournament]['startTimeSeconds'] = datetime.utcfromtimestamp(tournaments[tournament]['startTimeSeconds']).strftime("%d.%m.%Y %H:%M:%S")
 
 	return tournaments
+
+def _show_user_submission(name_user: str, start_pos: int, end_pos: int) -> List:
+	if start_pos == 0:
+		start_pos = 1
+	submissions = requests.get(f'https://codeforces.com/api/user.status?handle={name_user}&from={start_pos}&count={end_pos}').json()['result']
+	for submission in range(len(submissions)):
+		submissions[submission]['creationTimeSeconds'] = datetime.utcfromtimestamp(submissions[submission]['creationTimeSeconds']).strftime("%d.%m.%Y %H:%M:%S")
+	return submissions
+
+def _show_user_blog(name_user: str) -> List:
+	return requests.get(f'https://codeforces.com/api/user.blogEntries?handle={name_user}').json()['result']
+
+def _show_history_blog() -> List:
+	request = requests.get('https://codeforces.com/api/contest.list?gym=false').json()['result']
+	indent = 0
+
+	for tournament in request:
+		if tournament['phase'] != 'BEFORE':
+			break
+		indent += 1
+	return request[indent::]
+
+def _show_tournament_info(id_tournament: int) -> Dict:
+	request = requests.get(f'https://codeforces.com/api/contest.standings?contestId={id_tournament}&from=1&count=5&showUnofficial=true').json()['result']['contest']
+	request['durationSeconds'] = datetime.utcfromtimestamp(request['durationSeconds']).strftime("%H:%M:%S")
+	request['startTimeSeconds'] = datetime.utcfromtimestamp(request['startTimeSeconds']).strftime("%d.%m.%Y %H:%M:%S")
+	return request
+
+def _show_problem_info(id_tournament: int) -> List:
+	return requests.get(f'https://codeforces.com/api/contest.standings?contestId=1477&from=1&count=5&showUnofficial=true').json()['result']['problems']

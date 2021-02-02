@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<div class = "container mt-5">
+    <h1>Информация о турнире</h1>
+    <div class="alert alert-info">
+      <h1>Названия тунира - <a href="https://codeforces.com/contest/{{ tournament['id'] }}">{{ tournament['name'] }}</a></h1>
+      <h1>Длительность - {{ tournament['durationSeconds'] }}</h1> 
+      <h1>Начался - {{ tournament['startTimeSeconds'] }}</h1>
+    </div>
+    <h1>Задачи</h1>
+      {% for problem in problems %}
+        <div class="alert alert-info">
+        <h1>Категория - {{ problem['index'] }}</h1>
+        <h1>Названия - <a href="https://codeforces.com/contest/{{ id_tournament }}/problem/{{ problem['index'] }}">{{ problem['name'] }}</a></h1>
+        <h1>Очки - {{ problem['points'] }}</h1>
+        <h1>Рейтинг - {{ problem['rating'] }}</h1>
+        <h1>Теги - {{ ' '.join(problem['tags']) }}</h1>
+        </div>
+      {% endfor %}
+</div>
+{% endblock %}

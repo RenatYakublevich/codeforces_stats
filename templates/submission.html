@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Когда</th>
+      <th scope="col">Задача</th>
+      <th scope="col">Язык</th>
+      <th scope="col">Вердикт</th>
+      <th scope="col">Время</th>
+      <th scope="col">Память</th>
+    </tr>
+  </thead>
+  <tbody>
+            {% for submission in submissions %}
+                <tr>
+                      <th scope="row">{{ submission['creationTimeSeconds'] }}</th>
+                      <td><a href="https://codeforces.com/contest/{{ submission['problem']['contestId']}}/problem/{{submission['problem']['index'] }}">{{ submission['problem']['index'] + ' - ' + submission['problem']['name'] }}</a></td>
+                      <td>{{ submission['programmingLanguage'] }}</td>
+                      <td>{{ submission['verdict'] }}</td>
+                      <td>{{ submission['timeConsumedMillis'] }} мс</td>
+                      <td>{{ submission['memoryConsumedBytes'] }} байт</td>
+                </tr>
+            {% endfor %}
+  </tbody>
+</table>
+<h3><a href="{{ url_for('get_status', name=name, start=page_prev) }}">Предыдущая</a> <a href="{{ url_for('get_status', name=name, start=page_next) }}">Следующая</a></h3>
+{% endblock %}

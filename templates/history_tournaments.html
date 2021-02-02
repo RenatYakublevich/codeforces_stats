@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+{% for tournament in tournaments %}
+  <div class = "container mt-5">
+    <div class="alert alert-info">
+      <h1><a href="{{ url_for('get_tournament_info',id_tournament=tournament['id']) }}">{{ tournament['name'] }}</a></h1>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
