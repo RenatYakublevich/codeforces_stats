@@ -25,5 +25,5 @@
             {% endfor %}
   </tbody>
 </table>
-<h3><a href="{{ url_for('get_status', name=name, start=page_prev) }}">Предыдущая</a> <a href="{{ url_for('get_status', name=name, start=page_next) }}">Следующая</a></h3>
+<h3><a href="{{ url_for('get_status', name=name, start=page_prev) }}">{{ 'Предыдущая' if page_prev != -1 else '' }}</a> <a href="{{ url_for('get_status', name=name, start=page_next) }}">Следующая</a></h3>
 {% endblock %}
