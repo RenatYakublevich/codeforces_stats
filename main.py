@@ -43,7 +43,7 @@ def showInfoUser(name):
 
 @app.route('/rating')
 def rating():
-    return render_template('rating.html',rating=_show_rating_list(0,20),title='Рейтинг')
+    return render_template('rating.html',rating=_show_rating_list(),title='Рейтинг')
 
 @app.route('/problems')
 def problems():
